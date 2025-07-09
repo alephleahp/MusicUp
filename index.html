@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>COIN$ MUSIC - UPLAND EXCLUSIVE</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 40px 20px;
+            row-gap: 20px;
+            font-family: 'Georgia', serif;
+            background-color: #f9f7f2;
+            color: #1a1a1a;
+            display: grid;
+            row-gap: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            margin: 0 auto 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .top, .bottom {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 0 10px;
+            align-items: start;
+            padding: 0 20px;
+        }
+
+        .middle {
+            display: grid;
+            grid-template-columns: 30% 40% 30%;
+            align-items: center;
+            gap: 20px;
+            padding: 20px 10px;
+        }
+
+        .phrase, .address, .lyrics, .merch, .links, .next {
+            font-size: 18px;
+            line-height: 1.5;
+        }
+
+        .section-title {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 12px;
+            color: #333;
+        }
+
+        .player-area {
+            text-align: center;
+        }
+
+        .player-art {
+            width: 100%;
+            max-width: 320px;
+            height: auto;
+            margin: 0 auto 20px;
+            box-shadow: 0 0 25px rgba(0,0,0,0.15);
+            display: block;
+            border-radius: 12px;
+        }
+
+        .song-title {
+            font-weight: bold;
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+
+        .artist-name {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 16px;
+        }
+
+        audio {
+            width: 100%;
+            max-width: 320px;
+        }
+
+        .link-icon {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        a {
+            color: #1a1a1a;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 900px) {
+            .top, .bottom {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .middle {
+                grid-template-columns: 1fr;
+                row-gap: 30px;
+            }
+        }
+
+        .top > div,
+        .bottom > div,
+        .middle > div {
+            text-align: center;
+        }
+
+        .hidden-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .fade-in {
+            display: block !important;
+            opacity: 1 !important;
+        }
+
+        .fade-in-grid {
+            display: grid !important;
+            opacity: 1 !important;
+        }
+
+        .unlock-icon {
+            animation: blink 1.2s infinite;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+
+            </style>
+</head>
+<body>
+    <h1>COIN$ MUSIC — UPLAND EXCLUSIVE</h1>
+
+    <section class="top" id="hiddenTop">
+        <div class="phrase" id="phraseBlock">
+            <div class="section-title">The why</div>
+            <div id="phraseContent"><span class="unlock-icon">⏳</span> Minting content...
+                
+            </div>
+        </div>
+        <div class="address">
+            <div class="section-title">In Upland</div>
+            8 Abbey Rd<br>
+            9 Abbey Rd<br>
+            32C Abbey Rd
+        </div>
+    </section>
+
+    <section class="middle">
+        <div class="lyrics" id="hiddenLyrics">
+            <div class="section-title">[Lyrics - mother singing]</div>
+            <div id="lyricsContent"><span class="unlock-icon">⏳</span> Minting content...</div>
+        </div>
+
+        <div class="player-area">
+            <img src="capa.png" alt="Cover Art" class="player-art">
+            <div class="song-title">Son's Song</div>
+            <div class="artist-name"><i>by leahp</i></div>
+            <audio controls id="audioPlayer">
+                <source src="sons_song.mp3" type="audio/mp3">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+
+        <div class="merch" style="margin-top: 15px;">
+            <div class="section-title">Merch</div>
+            soon
+        </div>
+    </section>
+
+    <section class="bottom">
+        <div class="links">
+            <div class="section-title">Socials</div>
+            <a class="link-icon" href="https://www.instagram.com/leahphael" target="_blank">📷 Instagram</a>
+            <a class="link-icon" href="https://open.spotify.com/artist/27yQaj33G9mZmMtV1YM6fM" target="_blank">🎵 Spotify</a>
+        </div>
+        <div class="next">
+            <div class="section-title">What's next?</div>
+            single "Son's Song" on Spotify
+        </div>
+    </section>
+
+    <script>
+    const audio = document.getElementById('audioPlayer');
+    const phraseContent = document.getElementById('phraseContent');
+    const lyricsContent = document.getElementById('lyricsContent');
+
+    let revealed = false;
+
+    function unlockContent() {
+        phraseContent.innerHTML = 'a dialogue of mother & son around the troubles of youth';
+        lyricsContent.innerHTML = `Hey! Dad is almost home...<br>
+            It ain't time<br>
+            For you to live alone<br>
+            One day you will be able to fly<br>
+            For now you're just a baby son<br>
+            And that is what you mean to mom`;
+    }
+
+    if (document.cookie.includes('contentUnlocked=true')) {
+        unlockContent();
+        revealed = true;
+    }
+
+    audio.addEventListener('timeupdate', () => {
+        if (!revealed && audio.currentTime >= 30) {
+            unlockContent();
+            document.cookie = 'contentUnlocked=true; path=/';
+            revealed = true;
+        }
+    });
+</script>
+</body>
+</html>
